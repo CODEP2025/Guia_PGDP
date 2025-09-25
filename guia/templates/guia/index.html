@@ -1,12 +1,15 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8" />
-    <title>Guia PGDP</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <h1>Guia PGDP — Página inicial</h1>
-    <p>Este é o template index.html inicial do app guia.</p>
-</body>
-</html>
+{% extends "guia/base.html" %}
+
+{% block title %}Início · Guia PGDP{% endblock %}
+
+{% block content %}
+  <section>
+    <h2>Bem-vindo(a) ao Guia PGDP</h2>
+    <p>Este é o template inicial. Use os links abaixo para navegar:</p>
+
+    <ul style="margin-top:12px; line-height:1.8;">
+      <li><a href="/procedimentos/">Ver lista de procedimentos</a></li>
+      <li><a href="/preview/">Pré-visualizar um procedimento</a></li>
+    </ul>
+  </section>
+{% endblock %}
