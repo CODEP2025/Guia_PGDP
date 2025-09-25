@@ -29,3 +29,45 @@ def preview_procedure(request):
         ],
     }
     return render(request, "guia/procedure_detail.html", context)
+
+def procedures_list(request):
+    q = request.GET.get("q", "").strip().lower()
+    cat = request.GET.get("cat", "").strip().lower()
+
+    # Dados fictícios para visualizar o layout
+    base = [
+        {
+            "titulo": "Solicitar Férias",
+            "categoria": "ferias",
+            "descricao": "Como solicitar férias pelo SEI.",
+            "sei_url": "https://sei.exemplo.gov.br/processo/456",
+        },
+        {
+            "titulo": "Afastamento por Motivo de Saúde",
+            "categoria": "afastamentos",
+            "descricao": "Passo a passo do afastamento médico.",
+            "sei_url": "",
+        },
+        {
+            "titulo": "Auxílio-Transporte",
+            "categoria": "beneficios",
+            "descricao": "Documentos e regras para concessão.",
+            "sei_url": "https://sei.exemplo.gov.br/processo/789",
+        },
+        {
+            "titulo": "Nomeação e Posse",
+            "categoria": "admissao",
+            "descricao": "Fluxo de nomeação de servidores.",
+            "sei_url": "",
+        },
+    ]
+
+    # filtros simples
+    itens = base
+    if q:
+        itens = [p for p in itens if q in p["titulo"].lower() or q in p.get("descricao","").lower()]
+    if cat:
+        itens = [p for p in itens if p.get("categoria","").lower() == cat]
+
+    ctx = {"procedimentos": itens, "q": q, "cat": cat}
+    return render(request, "guia/procedures_list.html", ctx)
