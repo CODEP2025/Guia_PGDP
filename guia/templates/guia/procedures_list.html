@@ -1,7 +1,14 @@
 {% extends "guia/base.html" %}
 {% load static %}
+
 {% block title %}Procedimentos · Guia PGDP{% endblock %}
+
 {% block content %}
+
+  <nav aria-label="breadcrumb" class="breadcrumb">
+    <a href="/">Início</a> › Procedimentos
+  </nav>
+
   <section class="layout-sidebar">
     <aside class="sidebar card">
       <h3>Filtros</h3>
@@ -12,6 +19,7 @@
         <li><a href="?cat=beneficios">Benefícios</a></li>
       </ul>
     </aside>
+
     <div class="content-area">
       <div class="list-header">
         <h2>Procedimentos</h2>
@@ -20,16 +28,21 @@
           <button class="btn" type="submit">Buscar</button>
         </form>
       </div>
+
       {% if procedimentos %}
         <ul class="proc-list">
           {% for p in procedimentos %}
           <li class="card proc-item">
-            <div>
-              <h3 class="proc-title"><a href="/preview/">{{ p.titulo }}</a></h3>
-              {% if p.categoria %}<div class="proc-cat">Categoria: {{ p.categoria }}</div>{% endif %}
-              {% if p.descricao %}<p class="proc-desc">{{ p.descricao }}</p>{% endif %}
-            </div>
-            {% if p.sei_url %}<a class="btn btn-sei" href="{{ p.sei_url }}" target="_blank" rel="noopener">Abrir no SEI</a>{% endif %}
+            <a class="proc-click" href="/preview/">
+              <div>
+                <h3 class="proc-title">{{ p.titulo }}</h3>
+                {% if p.categoria %}<div class="proc-cat">Categoria: {{ p.categoria }}</div>{% endif %}
+                {% if p.descricao %}<p class="proc-desc">{{ p.descricao }}</p>{% endif %}
+              </div>
+            </a>
+            {% if p.sei_url %}
+            <a class="btn btn-sei" href="{{ p.sei_url }}" target="_blank" rel="noopener">Abrir no SEI</a>
+            {% endif %}
           </li>
           {% endfor %}
         </ul>
