@@ -1,9 +1,11 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, "guia/index.html")
+    # Home agora herda o base.html via home.html
+    return render(request, "guia/home.html")
 
 def preview_procedure(request):
+    # Dados fictícios só para visualizar o layout do detalhe
     context = {
         "procedure": {
             "titulo": "Licença Maternidade",
@@ -34,7 +36,7 @@ def procedures_list(request):
     q = request.GET.get("q", "").strip().lower()
     cat = request.GET.get("cat", "").strip().lower()
 
-    # Dados fictícios para visualizar o layout
+    # Dados fictícios para ver a listagem
     base = [
         {
             "titulo": "Solicitar Férias",
@@ -62,7 +64,6 @@ def procedures_list(request):
         },
     ]
 
-    # filtros simples
     itens = base
     if q:
         itens = [p for p in itens if q in p["titulo"].lower() or q in p.get("descricao","").lower()]
