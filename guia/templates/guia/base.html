@@ -13,9 +13,9 @@
     <div class="container">
       <h1 class="site-title"><a href="/">Guia PGDP</a></h1>
       <nav class="site-nav">
-        <a href="/">Início</a>
-        <a href="/procedimentos/">Procedimentos</a>
-        <a href="/preview/">Preview procedimento</a>
+        <a href="/" class="{% if request.path == '/' %}active{% endif %}">Início</a>
+        <a href="/procedimentos/" class="{% if request.path|slice:':14' == '/procedimentos' %}active{% endif %}">Procedimentos</a>
+        <a href="/preview/" class="{% if request.path|slice:':9' == '/preview/' %}active{% endif %}">Preview procedimento</a>
       </nav>
     </div>
   </header>
