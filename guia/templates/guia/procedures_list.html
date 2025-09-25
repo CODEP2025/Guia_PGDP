@@ -1,0 +1,47 @@
+{% extends "guia/base.html" %}
+{% load static %}
+
+{% block title %}Procedimentos · Guia PGDP{% endblock %}
+
+{% block content %}
+  <section class="layout-sidebar">
+    <aside class="sidebar card">
+      <h3>Filtros</h3>
+      <ul class="filters">
+        <li><a href="?cat=admissao">Admissão</a></li>
+        <li><a href="?cat=afastamentos">Afastamentos</a></li>
+        <li><a href="?cat=ferias">Férias</a></li>
+        <li><a href="?cat=beneficios">Benefícios</a></li>
+      </ul>
+    </aside>
+
+    <div class="content-area">
+      <div class="list-header">
+        <h2>Procedimentos</h2>
+        <form method="get" class="search-form">
+          <input class="search-input" type="search" name="q" value="{{ q|default:'' }}" placeholder="Buscar procedimento..." />
+          <button class="btn" type="submit">Buscar</button>
+        </form>
+      </div>
+
+      {% if procedimentos %}
+        <ul class="proc-list">
+          {% for p in procedimentos %}
+          <li class="card proc-item">
+            <div>
+              <h3 class="proc-title"><a href="/preview/">{{ p.titulo }}</a></h3>
+              {% if p.categoria %}<div class="proc-cat">Categoria: {{ p.categoria }}</div>{% endif %}
+              {% if p.descricao %}<p class="proc-desc">{{ p.descricao }}</p>{% endif %}
+            </div>
+            {% if p.sei_url %}
+            <a class="btn btn-sei" href="{{ p.sei_url }}" target="_blank" rel="noopener">Abrir no SEI</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Nenhum procedimento encontrado.</p>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}
