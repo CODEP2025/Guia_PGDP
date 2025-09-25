@@ -1,8 +1,6 @@
 {% extends "guia/base.html" %}
 {% load static %}
-
 {% block title %}Procedimentos · Guia PGDP{% endblock %}
-
 {% block content %}
   <section class="layout-sidebar">
     <aside class="sidebar card">
@@ -14,7 +12,6 @@
         <li><a href="?cat=beneficios">Benefícios</a></li>
       </ul>
     </aside>
-
     <div class="content-area">
       <div class="list-header">
         <h2>Procedimentos</h2>
@@ -23,7 +20,6 @@
           <button class="btn" type="submit">Buscar</button>
         </form>
       </div>
-
       {% if procedimentos %}
         <ul class="proc-list">
           {% for p in procedimentos %}
@@ -33,9 +29,7 @@
               {% if p.categoria %}<div class="proc-cat">Categoria: {{ p.categoria }}</div>{% endif %}
               {% if p.descricao %}<p class="proc-desc">{{ p.descricao }}</p>{% endif %}
             </div>
-            {% if p.sei_url %}
-            <a class="btn btn-sei" href="{{ p.sei_url }}" target="_blank" rel="noopener">Abrir no SEI</a>
-            {% endif %}
+            {% if p.sei_url %}<a class="btn btn-sei" href="{{ p.sei_url }}" target="_blank" rel="noopener">Abrir no SEI</a>{% endif %}
           </li>
           {% endfor %}
         </ul>
